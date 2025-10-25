@@ -1,0 +1,168 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5); /* semi-transparent background */
+    }
+
+    /* Popup box */
+    .modal-content {
+      background-color: #fff;
+      margin: 15% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 40%;
+      box-shadow: 0 0 10px rgb(255, 255, 255);
+      text-align: center;
+    }
+
+    /* Close button */
+    .close {
+      float: right;
+      font-size: 20px;
+      cursor: pointer;
+      color: red;
+    }
+
+    button {
+      background-color: #0d49c2;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+/* Updated style for text inputs in the modal */
+input[type="text"], textarea {
+    width: 98%; 
+    padding: 12px; /* Slight increase in vertical size */
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+     .submit-btn {
+      background-color: #0adf75;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+/* NAVBAR stays at top */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  background-color: #dedede;
+}
+
+/* SIDEBAR below navbar */
+/* Make sure your sidebar is fixed */
+.sidebar {
+  position: fixed;
+  top: 60px;             /* below navbar */
+  left: 0;
+  width: 400px;          /* adjust width if needed */
+  height: calc(100vh - 60px);
+  background-color: #464646;
+  padding: 20px;
+  border-right: rgb(28, 24, 24) 2px solid;
+  overflow-y:auto ;
+}
+
+.sidebar .col-10{
+  word-break: break-all;
+}
+/* Main content next to sidebar */
+/* NAVBAR and SIDEBAR sections remain the same */
+
+/* Main content next to sidebar: CHANGE THESE RULES */
+.main-content{ 
+    margin-left: 400px;    /* same as sidebar width */
+    margin-top: 60px; /* below navbar */
+    height: calc(100vh - 60px);   /* fill available height */
+                      
+    position: relative;
+    background-color: #dedede;
+    padding: 30px; /* Add padding for space around the edges */
+
+    overflow-y: auto; /* Allow scrolling if content is too long */
+}
+
+/* Button styling: Use absolute position to center it within main-content */
+#openBtn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.1rem;
+    padding: 12px 25px;
+}
+
+/* Popup box content (modal-content) remains the same */
+
+/* Refined Post View Styling (Optional, but helps alignment/readability) */
+/* The styles for #post-view are currently inline in EJS, but setting a class helps */
+#post-view {
+  /* display: none; */
+  width: 70%;
+  background-color: #464646;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  text-align: justify;
+  word-wrap: break-word;       /* ✅ Breaks long words */
+  overflow-wrap: break-word;   /* ✅ Ensures wrapping in all browsers */
+  white-space: normal;         /* ✅ Prevents text from staying on one line */
+}
+
+
+#post-view-title{
+    text-align: center;
+}
+
+.list-group-item{
+  background-color: #464646;
+  color: white;
+}
+
+.title .mb-1{
+  color: rgb(231, 210, 24);
+}
+
+.seepost{
+  color: white;
+  text-decoration: none;
+}
+
+.logo{
+  width: 30px;
+  height: 30px;
+  
+}
+
+.navbar-right{
+  display: flex;
+  margin-right: ;
+
+}
+
+.navbar-right .sections{
+  padding-left: 80px;
+  text-decoration: none;
+  color: black;
+  font-weight:bold;
+}

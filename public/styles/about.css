@@ -1,0 +1,42 @@
+body{
+    margin:0;
+    padding: 0;
+    background-color: rgb(209, 202, 202);
+}
+
+.about-page-bg {
+    /* Replace 'path/to/your/image.jpg' with the actual path */
+    background-image: url('images/about.jpg'); 
+    background-size: cover;       /* Ensures the image covers the entire body */
+    background-position: center;  /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling */
+    background-attachment: fixed; /* Keeps the background static when scrolling */
+}
+
+.container{
+    padding-top: 100px !important;
+    padding-bottom: 50px;
+    
+    /* Remove any unwanted margin that might be pushing it down */
+    margin-top: 0 !important;
+}
+
+
+.row{
+    background-color: rgba(255, 255, 255, 0.9); /* Translucent white background */
+    border-radius: 15px; /* Optional: adds rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional: adds depth */
+    margin-left: auto !important; /* Center the row block horizontally */
+    margin-right: auto !important;
+    height: auto !important;
+}
+
+
+.col-lg-6{
+    height: auto !important;
+    margin-top: 0 !important;
+}
+
+
+
+

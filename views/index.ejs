@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Web</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="/styles/main.css" />
+    <script href="../index.js" charset="UTF-8"></script>
+  </head>
+
+  <body>
+    <div class="navbar bg-light py-3 border-bottom d-flex justify-content-between align-items-center px-4">
+    <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="images/signature.png" alt="App Logo" width="30" height="30" class="me-2">
+        <span class="fs-5 fw-bold text-dark">ViewPoint</span>
+    </a>
+
+    <div class =navbar-right>
+      <div class="sections"><a href="/">Home</a></div>
+      <div class="sections"><a href="/about">About</a></div>
+      <div class="sections"><a href="#">Contact</a></div>
+    </div>
+</div>
+
+     
+
+  <div class="sidebar">
+    <a href="/" class="seepost d-flex align-items-center justify-content-center p-3 border-bottom ">
+      <span class="fs-5 fw-semibold">See your Posts</span>
+    </a>
+      <div class="list-group list-group-flush border-bottom scrollarea">
+        <% if (posts.length > 0) { %>
+          <% posts.forEach(post => { %>
+            <a href="#" class="list-group-item list-group-item-action py-3 lh-sm post-link"
+                 data-post-title="<%= post.title %>" 
+                 data-post-content="<%= post.content %>"
+            >
+              <div class="title d-flex w-100 align-items-center justify-content-between">
+                <strong class="mb-1"><%= post.title %></strong>
+                <small><%= post.date %> </small>
+              </div>
+              <div class="content col-10 mb-1 small">
+                 <%= post.content ? post.content.slice(0,85)+"..." : "[No Content]" %>
+            </div>
+            </a>
+          <% }) %>
+        <% } else { %>
+          <p class="p-3 text-muted">No posts yet.</p>
+        <% } %>
+      </div>
+    </div>           <!--sidebar ends -->
+
+    <div class="main-content">
+        <button class="btn btn-secondary rounded-pill px-3" id="openBtn" type="button">
+            + Add your Post
+        </button>      
+        <div id="post-view" style="display:none; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <h2 id="post-view-title" class="mb-3"></h2>
+            <hr>
+            <p id="post-view-content"></p>
+        </div>
+    </div>
+
+  <!-- Popup box -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <form class="addPost" action="addPost" method="post">
+        <label for="title">Title : </label>
+        <input type="text" name="title" placeholder="Add your title"><br>
+
+        <label for="content">Description : <br></label>
+        <input type="text" name="content" placeholder="Add Details">
+        <button type="submit" class="submit-btn" id="okBtn">OK</button>
+      </form>
+      
+    </div>
+  </div>
+
+    <script>
+      src =
+        "https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js";
+      integrity =
+        "sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI";
+      crossorigin = "anonymous";</script>
+
+    <script>
+
+    const modal = document.getElementById("myModal");
+    const openBtn = document.getElementById("openBtn");
+    const closeBtn = document.querySelector(".close");
+    // const okBtn = document.getElementById("okBtn"); // No longer needed for logic
+
+    const postLinks = document.querySelectorAll(".post-link"); 
+    const postView = document.getElementById("post-view");
+    const postViewTitle = document.getElementById("post-view-title");
+    const postViewContent = document.getElementById("post-view-content");
+
+    // Helper function to reset the main content area visibility (Show button, hide post view)
+    function resetMainContent() {
+        openBtn.style.display = 'block'; // Ensure the "Add Post" button is VISIBLE
+        postView.style.display = 'none'; // Ensure the post view is HIDDEN
+    }
+
+    // 1. Open popup: Show modal, hide button
+    openBtn.onclick = () => {
+        modal.style.display = "block";
+        postView.style.display = "none";
+        openBtn.style.display = "none"; // ✅ CRITICAL FIX: Hide the button while modal is open
+    };
+
+    // 2. Close popup (when 'X' is clicked)
+    closeBtn.onclick = () => {
+        modal.style.display = "none";
+        resetMainContent(); // Resets button visibility
+    };
+    
+    // 3. Close popup when clicking outside
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            modal.style.display = "none";
+            resetMainContent(); // Resets button visibility
+        }
+    };
+
+    // 4. Content formatting function (for <textarea> newlines)
+    function formatText(text){
+     return text.replace(/\n/g,"<br>")
+    }
+
+    // 5. Post Link Click Handler
+    postLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault(); 
+
+            // Get post data
+            const title = this.getAttribute('data-post-title');
+            const content = this.getAttribute('data-post-content');
+
+            // Update the main content view
+            postViewTitle.textContent = title;
+            postViewContent.innerHTML = formatText(content); // Use innerHTML for paragraphs
+
+            // Toggle visibility: show post view, hide add button, close modal
+            openBtn.style.display = 'none';
+            postView.style.display = 'block';
+            modal.style.display = 'none'; // Ensure modal is closed
+        });
+    });
+
+</script>
+  </body>
+</html>
